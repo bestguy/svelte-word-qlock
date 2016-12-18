@@ -1,6 +1,8 @@
 ![Sample](./sample.jpg)
 
-# Web-based word qlock using:
+[DEMO](https://bestguy.github.io/svelte-word-qlock/)
+
+# Web-based word clock using:
 
 * [Svelte](http://svelte.technology/)
 * [ES6 (via BabelJS)](http://babeljs.io/)
@@ -20,4 +22,4 @@
 
     npm install
     webpack -p
-    Host index.html and bundle.js wherever you want.
+    Host Qlock.js wherever you'd like.
