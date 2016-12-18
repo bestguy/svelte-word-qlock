@@ -1,0 +1,56 @@
+<pre>
+<Word on="true">IT</Word>L<Word on="true">IS</Word>BFAMPM
+<Word on="{{quarter}}">A</Word>C<Word on="{{quarter}}">QUARTER</Word>DC
+<Word on="{{twentyMinutes}}">TWENTY</Word><Word on="{{fiveMinutes}}">FIVE</Word>X
+<Word on="{{half}}">HALF</Word>B<Word on="{{tenMinutes}}">TEN</Word>F<Word on="{{to}}">TO</Word>
+<Word on="{{past}}">PAST</Word>ERU<Word on="{{h == 9}}">NINE</Word>
+<Word on="{{h == 1}}">ONE</Word><Word on="{{h == 6}}">SIX</Word><Word on="{{h == 3}}">THREE</Word>
+<Word on="{{h == 4}}">FOUR</Word><Word on="{{h == 5}}">FIVE</Word><Word on="{{h == 2}}">TWO</Word>
+<Word on="{{h == 8}}">EIGHT</Word><Word on="{{h == 11}}">ELEVEN</Word>
+<Word on="{{h == 7}}">SEVEN</Word><Word on="{{h == 0}}">TWELVE</Word>
+<Word on="{{h == 10}}">TEN</Word>SE<Word on="{{oclock}}">OCLOCK</Word>
+<Word on="{{oneMinute}}">.</Word>  <Word on="{{twoMinutes}}">.</Word>  <Word on="{{threeMinutes}}">.</Word>  <Word on="{{fourMinutes}}">.</Word>
+</pre>
+
+<script>
+import Word from './Word.html';
+
+export default {
+  components: {
+    Word
+  },
+  data() {
+    return {
+      time: new Date()
+    };
+  },
+  computed: {
+    m: time => time.getMinutes(),
+    h: (time, m) => {
+      const h = time.getHours();
+      return (h + (m >= 35 ? 1 : 0)) % 12;
+    },
+    past: m => m >= 5 && m < 35,
+    to: m => m >= 35,
+    oclock: m => m >= 0 && m < 5,
+    oneMinute: m => m % 5 >= 1,
+    twoMinutes: m => m % 5 >= 2,
+    threeMinutes: m => m % 5 >= 3,
+    fourMinutes: m => m % 5 >= 4,
+    fiveMinutes: m => (m >= 5 && m < 10) || (m >= 55) || (m >= 25 && m < 30) || (m >= 35 && m < 40),
+    tenMinutes: m => (m >= 10 && m < 15) || (m >= 50 && m < 55),
+    quarter: m => (m >= 15 && m < 20) || (m >= 45 && m < 50),
+    twentyMinutes: m => (m >= 20 && m < 30) || (m >= 35 && m < 45),
+    half: m => (m >= 30 && m < 35)
+  },
+  onrender() {
+    this.interval = setInterval(() => {
+      const now = new Date();
+      this.set({ time: now });
+    }, 3000);
+  },
+  onteardown () {
+    clearInterval(this.interval);
+  },
+};
+</script>
