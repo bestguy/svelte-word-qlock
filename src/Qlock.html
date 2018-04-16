@@ -43,13 +43,13 @@ export default {
     twentyMinutes: m => (m >= 20 && m < 30) || (m >= 35 && m < 45),
     half: m => (m >= 30 && m < 35)
   },
-  onrender() {
+  oncreate() {
     this.interval = setInterval(() => {
       const now = new Date();
       this.set({ time: now });
     }, 3000);
   },
-  onteardown () {
+  ondestroy() {
     clearInterval(this.interval);
   },
 };
