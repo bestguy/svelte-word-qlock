@@ -16,7 +16,8 @@ body {
 pre {
   color: rgba(255, 255, 255, 0.27);
   font-size: 5vmin;
-  letter-spacing: 0.46em;
+/*  letter-spacing: 0.46em;*/
+  letter-spacing: 0.55em;
   text-align: center;
   transition: color 1s ease, text-shadow 1s ease;
 }

@@ -1,4 +1,21 @@
 <pre>
+<Word on="{{h >= 10 || h == 0}}">MƯỜI</Word><Word on="{{h == 6}}">SÁU</Word><Word on="{{h == 1 || h == 11}}">MỘT</Word>
+<Word on="{{h == 4}}">BỐN</Word>G<Word on="{{h == 5}}">NĂM</Word><Word on="{{h == 2 || h == 0}}">HAI</Word>
+<Word on="{{h == 8}}">TÁM</Word><Word on="{{h == 9}}">CHÍN</Word><Word on="{{h == 7}}">BẢY</Word>
+<Word on="{{h == 3}}">BA</Word>V<Word on>GIỜ</Word>X<Word on="{{to}}">KÉM</Word>
+X<Word on="{{twentyMinutes}}">HAI</Word>P<Word on="{{tenMinutes || quarter}}">MƯỜI</Word>T
+<Word on="{{twentyMinutes}}">MƯƠI</Word><Word on="{{fiveOnlyMinutes}}">NĂM</Word><Word on="{{plusFiveMinutes}}">LĂM</Word>
+<Word on="{{half}}">RƯỠI</Word>BF<Word on="{{H < 12}}">SÁNG</Word>
+<Word on="{{H >= 19 && H < 23}}">TỒI</Word>ZE<Word on="{{H >= 15 && H <= 18}}">CHIỀU</Word>
+<Word on="{{H >= 23 && H < 24}}">KHUYA</Word>B<Word on="{{H >= 12 && H < 15}}">TRƯA</Word>
+<Word on="{{oneMinute}}">.</Word>  <Word on="{{twoMinutes}}">.</Word>  <Word on="{{threeMinutes}}">.</Word>  <Word on="{{fourMinutes}}">.</Word>
+</pre>
+<!--
+<input type="number" bind:value="h" min="0" max="23" />
+<input type="number" bind:value="m" min="0" max="59" />
+-->
+<!--
+<pre>
 <Word on="true">IT</Word>L<Word on="true">IS</Word>BFAMPM
 <Word on="{{quarter}}">A</Word>C<Word on="{{quarter}}">QUARTER</Word>DC
 <Word on="{{twentyMinutes}}">TWENTY</Word><Word on="{{fiveMinutes}}">FIVE</Word>X
@@ -11,6 +28,23 @@
 <Word on="{{h == 10}}">TEN</Word>SE<Word on="{{oclock}}">OCLOCK</Word>
 <Word on="{{oneMinute}}">.</Word>  <Word on="{{twoMinutes}}">.</Word>  <Word on="{{threeMinutes}}">.</Word>  <Word on="{{fourMinutes}}">.</Word>
 </pre>
+-->
+
+<!--
+<pre>
+<Word on="true">ES</Word>L<Word on="true">IST</Word>FAMPM
+<Word on="{{quarter}}">EIN</Word>C<Word on="{{quarter}}">VIERTEL</Word>
+<Word on="{{fiveMinutes}}">FÜNF</Word>UND<Word on="{{twentyMinutes}}">ZWANZIG</Word>
+<Word on="{{half}}">HALB</Word><Word on="{{tenMinutes}}">ZEHN</Word>F<Word on="{{to}}">VOR</Word>
+<Word on="{{past}}">NACH</Word>ERU<Word on="{{h == 9}}">NEUN</Word>
+<Word on="{{h == 1}}">EINS</Word><Word on="{{h == 6}}">SECHS</Word><Word on="{{h == 3}}">DREI</Word>
+<Word on="{{h == 4}}">VIER</Word>LR<Word on="{{h == 5}}">FÜNF</Word>A
+<Word on="{{h == 8}}">ACHT</Word><Word on="{{h == 11}}">ELF</Word><Word on="{{h == 2}}">ZWEI</Word>
+<Word on="{{h == 7}}">SIEBEN</Word><Word on="{{h == 0}}">ZWÖLF</Word>
+<Word on="{{h == 10}}">ZEHN</Word>TSE<Word on="{{oclock}}">UHR</Word>X
+<Word on="{{oneMinute}}">.</Word>  <Word on="{{twoMinutes}}">.</Word>  <Word on="{{threeMinutes}}">.</Word>  <Word on="{{fourMinutes}}">.</Word>
+</pre>
+-->
 
 <script>
 import Word from './Word.html';
@@ -30,6 +64,7 @@ export default {
       const h = time.getHours();
       return (h + (m >= 35 ? 1 : 0)) % 12;
     },
+    H: time => time.getHours(),
     past: m => m >= 5 && m < 35,
     to: m => m >= 35,
     oclock: m => m >= 0 && m < 5,
@@ -38,9 +73,11 @@ export default {
     threeMinutes: m => m % 5 >= 3,
     fourMinutes: m => m % 5 >= 4,
     fiveMinutes: m => (m >= 5 && m < 10) || (m >= 55) || (m >= 25 && m < 30) || (m >= 35 && m < 40),
+    fiveOnlyMinutes: m => (m >= 5 && m < 10) || (m >= 55),
     tenMinutes: m => (m >= 10 && m < 15) || (m >= 50 && m < 55),
     quarter: m => (m >= 15 && m < 20) || (m >= 45 && m < 50),
     twentyMinutes: m => (m >= 20 && m < 30) || (m >= 35 && m < 45),
+    plusFiveMinutes: m => (m >= 15 && m < 20) || (m >= 25 && m < 30) || (m >= 35 && m < 40) || (m >= 45 && m < 50),
     half: m => (m >= 30 && m < 35)
   },
   onrender() {
